@@ -1,0 +1,12 @@
+{
+    "name": "acer/leo-custom",
+    "authors": [
+        {
+            "name": "leio-hub",
+            "email": "leo@greydientlab.com"
+        }
+    ],
+    "require": {
+        "stoutlogic/acf-builder": "^1.12"
+    }
+}
