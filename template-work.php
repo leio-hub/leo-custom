@@ -1,77 +1,65 @@
-<?php 
+<?php
 /* Template Name: Work */
 
 ?>
 
 <?php get_header();
 
-    $burger       = get_field('menu_pic');
-    $close_burger = get_field('close_menu_pic');
-    $menu         = $burger['sizes']['cstm_size'];
-    $close        = $close_burger['sizes']['cstm_size'];
+$burger         = get_field('menu_pic');
+$close_burger   = get_field('close_menu_pic');
+$menu           = $burger['sizes']['cstm_size'];
+$close          = $close_burger['sizes']['cstm_size'];
+$atropos_image  = get_field('atropos');
+$atropos_pic    = $atropos_image['sizes']['cstm_size'];
+$post = get_post('my-custom-post-type');
+
+
 ?>
+<div>
+
+</div>
+
+
+
 <div class="bgcolorwork">
-    <div class="row">
-        <div class="contacttext"><h1>HERE ARE SOME OF MY WORKS</h1></div>
-    </div>
-</div>
 
-<div class="sidebar-container">
-    <div class="sidebar">
-    <?php 
-                    wp_nav_menu(
-                        array(
-                            'theme_location' => 'left-menu',
-                            
-                            )            
-                    );
-                
-                    wp_nav_menu(
-                        array(
-                            'theme_location' => 'right-menu',
-                            
-                            )            
-                    ); 
-                ?>
-    </div>
-</div>
-    <section class="white container">
-        <div class="list1">
-            <?php if( have_rows ( 'list_items' ) ) : ?>
-                <?php while( have_rows ( 'list_items' ) ): the_row(); ?>
-                    <div class="row list" id="<?php echo "row-" . get_row_index(); ?>">
-                        <div class="tooltip1">  
-                            <div class="image_container">
-                                <?php 
-                                    $list_images = get_sub_field ('list_images'); 
-                                    $image_in_list = $list_images['sizes']['cstm_size'];
-                                        ?>    
-                                <img src="<?php echo $image_in_list; ?>" class="list-images" id="<?php echo $image_index; ?>">
-                                <!-- <div class="tooltipbutton">
-                                    <span>View</span>
-                                </div>        -->
-                            </div>
-                            </div>
+    <div class="contacttext">
+        <h1 style="color: white;">HERE ARE SOME OF MY WORKS</h1>
 
-                        <div class="col-9">
-                            <?php the_sub_field ( 'recent_works' ); ?>
+        <?php if (have_rows('work_contents')) : ?>
+            <?php while (have_rows('work_contents')) : the_row(); ?>
+                <div class="atropos my-atropos ">
+                    <div class="atropos-scale">
+                        <div class="atropos-rotate">
+                            <div class="atropos-inner">
+                                <div class="image-bg" data-atropos-offset=0>
+                                    <img src="<?php echo $atropos_pic; ?>" style="z-index:100; display:block;">
+                                    <div class="capstone_video">
+                                        <video id="capstone_vid" width="180" height="320" plays-inline autoplay loop muted>
+                                            <source src="<?php $capstone_vid = get_sub_field('capstone_vid');
+                                                            echo $capstone_vid; ?>" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <div class="background-overlay"></div>
+                                    <div class="hover-content">
+                                        <!-- <h2>TECH USED</h2> -->
+                                        <?php if (have_rows('tech_icons_pic')) : ?>
+                                            <?php while (have_rows('tech_icons_pic')) : the_row(); ?>
+                                                <?php
+                                                $tech_pics = get_sub_field('tech_icons');
+                                                ?>
+
+                                                <img src="<?php echo $tech_pics['url']; ?>" alt="" class="tech_icons">
+                                            <?php endwhile; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                            <div class="col-3">
-                                <h6>
-                                    <?php 
-                                        $type_of_work = get_sub_field ('type_of_work');
-                                        echo $type_of_work;
-                                        ?>
-                                </h6>
-                            </div>
-                        </div>	
-                <?php endwhile;?>    
-            <?php endif;?>
-        </div>
-    </section>
-<div class="bgcolorwork">
-    <div class="row">
-        <div class="contacttext"><h1>HERE ARE SOME OF MY WORKS</h1></div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php endif; ?>
     </div>
-</div>
-<?php get_footer(); ?>
+
+    <?php get_footer(); ?>
